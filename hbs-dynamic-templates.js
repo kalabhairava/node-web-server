@@ -10,7 +10,13 @@
 // npm package name => hbs
 
 const express = require("express");
+const hbs = require("hbs");
+
 const app = express();
+
+// Tell handlebarjs that we are gonna use partials
+// takes one argument, the absolute path of the directory containing partials
+hbs.registerPartials(__dirname + "/partials");
 
 // Expressjs configuration => takes key value pairs, key: configuration, value: what express should use
 app.set("view engine", "hbs");
@@ -22,7 +28,8 @@ app.use(express.static(__dirname + "/public"));
 
 app.get("/", (request, response) => {
   response.render("home.hbs", {
-    date: new Date().getDate()
+    pageTitle: "Home Page",
+    currentYear: new Date().getFullYear()
   });
 });
 
@@ -35,8 +42,11 @@ app.get("/about", (request, response) => {
   //   You can inject dynamic data to the template through the 2nd argument to render() function.
   //   Wrap the dynamic data in mustaches ({{}}) in the template to resolve it.
   response.render("about.hbs", {
+    pageTitle: "About Page",
     currentYear: new Date().getFullYear()
   });
 });
 
 app.listen(3000, () => console.log("Server is up on port 3000"));
+
+// A partial is a partial piece of a website that can be reused

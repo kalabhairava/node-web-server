@@ -9,16 +9,12 @@
 </head>
 
 <body>
-    <h1>About</h1>
+    {{> header}}
     <p>
-        We are here to help you.
+        Hello, is there anybody in there?
     </p>
 
-    <footer>
-        <p>
-            Copyright &copy; {{currentYear}}
-        </p>
-    </footer>
+    {{!-- Using a partial -> syntax: {{> partialName}} --}} {{> footer}}
 </body>
 
 </html>

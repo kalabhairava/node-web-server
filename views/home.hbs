@@ -1,5 +1,20 @@
-<h1>Welcome to the new age!!</h1>
+<!DOCTYPE html>
+<html>
 
-<p>Boom boom boom</p>
+<head>
+    <meta charset="utf-8">
+    <title>
+        Home Page
+    </title>
+</head>
 
-<div>Today is {{date}}</div>
+<body>
+    {{> header}}
+    <p>
+        Welcome to my awesome website
+    </p>
+
+    {{!-- Using a partial -> syntax: {{> partialName}} --}} {{> footer}}
+</body>
+
+</html>
