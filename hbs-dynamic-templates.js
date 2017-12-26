@@ -21,15 +21,22 @@ app.set("view engine", "hbs");
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", (request, response) => {
-  const template = "<h1> Hello Express </h1>";
-  response.send(template);
+  response.render("home.hbs", {
+    date: new Date().getDate()
+  });
 });
 
 // add a 2nd route => /about
 app.get("/about", (request, response) => {
   // response.send("This is about page");
   // render handlbars template
-  response.render("about.hbs"); // Express will look for this file in the default directory for templates, which is 'views'
+  //   response.render("about.hbs"); // Express will look for this file in the default directory for templates, which is 'views'
+
+  //   You can inject dynamic data to the template through the 2nd argument to render() function.
+  //   Wrap the dynamic data in mustaches ({{}}) in the template to resolve it.
+  response.render("about.hbs", {
+    currentYear: new Date().getFullYear()
+  });
 });
 
 app.listen(3000, () => console.log("Server is up on port 3000"));
