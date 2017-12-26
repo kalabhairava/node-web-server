@@ -30,10 +30,7 @@ app.set("view engine", "hbs");
 // 'views' is the default directory that Express uses for templates
 // create a directory called 'views'
 
-// IMPORTANT: middleware are called in the order they are registered
-
-// register express middleware, takes a function
-app.use(express.static(__dirname + "/public"));
+// IMPORTANT: middleware are called in the order they are registered through app.use()
 
 // create a logger that logs every request made to the server along with a timestamp
 app.use((req, res, next) => {
@@ -63,7 +60,14 @@ app.use((req, res, next) => {
   // DO NOT CALL next() => to prevent user from traversing the site in maintenance mode
   // Just render the maintenance view
   res.render("maintenance");
+
+  //   The catch here is, if you hit localhost:3000/help, it will still be accessible as we have registered the middleware that renders the static files
+  //   before the middleware for maitenance. To fix this, move the static files middleware below this maintenance middleware
+  // Compare with previous commit to see the differences
 });
+
+// register express middleware to serve static pages, takes a function
+app.use(express.static(__dirname + "/public"));
 
 app.get("/", (request, response) => {
   response.render("home.hbs", {
