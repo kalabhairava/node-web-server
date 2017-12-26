@@ -1,5 +1,6 @@
 <footer>
     <p>
-        Copyright &copy; {{currentYear}}
+        {{!-- When you specify something inside mustaches that is clearly not a partial, hbs looks for a helper with that name first,
+        and then looks for a variable with that name. --}} Copyright &copy; {{getCurrentYear}}
     </p>
 </footer>

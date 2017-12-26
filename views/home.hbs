@@ -11,7 +11,8 @@
 <body>
     {{> header}}
     <p>
-        Welcome to my awesome website
+        {{!-- Passing variables to helper function => nameOftheHelperFunction arg1 arg2 so on (name of helper function followed by
+        a list of arguments seperated by space) --}} {{screemIt 'Welcome to my awesome website'}}
     </p>
 
     {{!-- Using a partial -> syntax: {{> partialName}} --}} {{> footer}}

@@ -14,9 +14,23 @@ const hbs = require("hbs");
 
 const app = express();
 
+// A partial is a partial piece of a website that can be reused
 // Tell handlebarjs that we are gonna use partials
 // takes one argument, the absolute path of the directory containing partials
 hbs.registerPartials(__dirname + "/partials");
+
+// Handlebars helpers => a way to register functions to run that generate data dynamically
+// takes 2 arguments => name of the helper, and the function that generates dynamic data
+// help you run some JS code inside your handlebars templates
+hbs.registerHelper("getCurrentYear", () => {
+  return new Date().getFullYear();
+});
+
+// a helper function that takes arguments
+hbs.registerHelper("screemIt", message => {
+  message = message || "";
+  return message.toUpperCase();
+});
 
 // Expressjs configuration => takes key value pairs, key: configuration, value: what express should use
 app.set("view engine", "hbs");
@@ -28,8 +42,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.get("/", (request, response) => {
   response.render("home.hbs", {
-    pageTitle: "Home Page",
-    currentYear: new Date().getFullYear()
+    pageTitle: "Home Page"
   });
 });
 
@@ -42,11 +55,8 @@ app.get("/about", (request, response) => {
   //   You can inject dynamic data to the template through the 2nd argument to render() function.
   //   Wrap the dynamic data in mustaches ({{}}) in the template to resolve it.
   response.render("about.hbs", {
-    pageTitle: "About Page",
-    currentYear: new Date().getFullYear()
+    pageTitle: "About Page"
   });
 });
 
 app.listen(3000, () => console.log("Server is up on port 3000"));
-
-// A partial is a partial piece of a website that can be reused
